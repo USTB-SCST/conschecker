@@ -89,8 +89,8 @@ mvn install:install-file -Dfile=conschecker-client-1.0.0.jar -DgroupId=com.nanxi
 conschecker:
   scanPackage: com.example # Target package name for static scanning
   MBSName: example-MBS # The name of the MBS that this microservice belongs to
-  serverHost: localhost # The 
-  serverPort: 80
+  serverHost: localhost # The host of the Nginx Service in the ConsChecker Server
+  serverPort: 80 # The port the Nginx Service listens to
 ````
 
 Then every time the microservice is started, the *conschecker-client* generates an MSDM model for the microservice.
