@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    restart: always
+
+  conschecker-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "9999:9999"
+    depends_on:
+      - redis
+    restart: always
+
+  redis:
+    container_name: container_redis
+    image: "library/redis:alpine"
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./config/redis/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./data/redis/:/data/
+      - ./log/redis/:/var/log/redis/
+    command: redis-server /usr/local/etc/redis/redis.conf
+    restart: always
